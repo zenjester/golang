@@ -1,4 +1,4 @@
-// Copyright © 2010-12 Qtrac Ltd.
+// Copyright © 2011-12 Qtrac Ltd.
 // 
 // This program or package and any associated files are licensed under the
 // Apache License, Version 2.0 (the "License"); you may not use these files
@@ -11,19 +11,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// hello.go
 package main
 
-import (
-    "fmt"
-    "os"
-    "strings"
-)
+import "path/filepath"
 
-func main() {
-    who := "World!"
-    if len(os.Args) > 1 { /* os.Args[0] is "hello" or "hello.exe" */
-        who = strings.Join(os.Args[1:], " ")
-    }
-    fmt.Println("Hello", who)
+func commandLineFiles(files []string) []string {
+	args := make([]string, 0, len(files))
+	for _, name := range files {
+		if matches, err := filepath.Glob(name); err != nil {
+			args = append(args, name) // Invalid pattern
+		} else if matches != nil { // At least one match
+			args = append(args, matches...)
+		}
+	}
+	return args
 }

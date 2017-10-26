@@ -1,4 +1,4 @@
-// Copyright © 2010-12 Qtrac Ltd.
+// Copyright © 2011-12 Qtrac Ltd.
 // 
 // This program or package and any associated files are licensed under the
 // Apache License, Version 2.0 (the "License"); you may not use these files
@@ -11,19 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// hello.go
 package main
 
-import (
-    "fmt"
-    "os"
-    "strings"
-)
-
-func main() {
-    who := "World!"
-    if len(os.Args) > 1 { /* os.Args[0] is "hello" or "hello.exe" */
-        who = strings.Join(os.Args[1:], " ")
-    }
-    fmt.Println("Hello", who)
-}
+func commandLineFiles(files []string) []string { return files }
